@@ -176,7 +176,7 @@ li a:hover {
 }
 
 /* carousel */ 
-.carousel-main .carousel-item {
+.carousel-main .carousel-item, #quotes {
     background-color: var(--color-purple);
 }
 
@@ -245,4 +245,22 @@ li a:hover {
 
 .filters input:focus, .filters input:active {
     background-color: #cd8ffc;
+}
+
+
+/* Loader */
+.loader {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #C271FF;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    background-color: var(--color-purple);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
