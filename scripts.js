@@ -134,3 +134,90 @@ $.ajax({
         });
     }
 });
+
+$.ajax({
+    url: 'https://smileschool-api.hbtn.info/latest-videos',
+    beforeSend: () => {
+        $('#latest-carousel').append('\
+            <div class="loader"></div>\
+        ');
+    },
+    success: (response) => {
+        $('#latest-carousel').empty();
+        $('#latest-carousel').append('\
+            <div class="carousel-inner d-flex d-md-flex p-5">\
+            </div>\
+            <a href="#latest-carousel" class="carousel-control-prev w-auto ml-2 ml-sm-4" role="button" data-slide="prev">\
+                <span class="control-btn" aria-hidden="true">\
+                    <img src="./images/arrow_black_left.png" alt="Arrow_black_left" width="35px" height="65px">\
+                </span>\
+                <span class="sr-only">Previous</span>\
+            </a>\
+            <a href="#latest-carousel" class="carousel-control-next w-auto mr-2 mr-sm-4" role="button" data-slide="next">\
+                <span class="control-btn" aria-hidden="true">\
+                    <img src="./images/arrow_black_right.png" alt="Arrow_black_right" width="35px" height="65px">\
+                </span>\
+                <span class="sr-only">Next</span>\
+            </a>\
+        ');
+
+        for (let i = 0; i < response.length; i++) {
+            const latestObject = response[i];
+            $('#latest-carousel .carousel-inner').append(`\
+            <div class="carousel-item">
+                <div class="card border-0 mx-5">
+                    <div class="card-img-top">
+                        <div class="thumbnail d-flex py-4 justify-content-center" style="background-image: url('${latestObject.thumb_url}')"> 
+                            <img src="./images/play.png" alt="Play" class="play-btn mt-3" width="75px" height="75px">
+                        </div>    
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">${latestObject.title}</h5>
+                        <p class="card-text">${latestObject['sub-title']}</p>
+                        <div class="profile-line">
+                            <img src="${latestObject.author_pic_url}" class="rounded-circle mr-2" alt=" profile pic" width="40px" height="40px">
+                            <strong>${latestObject.author}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <div class="stars-${latestObject.id}">
+                            </div>
+                            <div class="duration">
+                                <strong>${latestObject.duration}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+
+            for (let j = 1; j <= 5; j++) {
+                if (j <= latestObject.star) {
+                    $(`#latest-carousel .stars-${latestObject.id}`).append('<img src="./images/star_on.png" alt="Star on" width="15px" height="15px">');
+                } else {
+                    $(`#latest-carousel .stars-${latestObject.id}`).append('<img src="./images/star_off.png" alt="Star off" width="15px" height="15px">');
+                }
+            };
+
+            if (i == 0) {
+                $('#latest-carousel .carousel-inner .carousel-item').addClass('active');
+            }
+        };
+
+        const carouselWidth = $(".latest-videos-section #latest-carousel .carousel-inner")[0].scrollWidth;
+        const cardWidth = $("#latest-carousel .carousel-inner .carousel-item").width();
+        let scrollPosition = 0;
+    
+        $("#latest-carousel .carousel-control-next").on("click", function () {
+            if (scrollPosition < (carouselWidth - cardWidth * 2)) {
+                scrollPosition += cardWidth;
+                $("#latest-carousel .carousel-inner").animate({ scrollLeft: scrollPosition }, 500);
+            }
+        });
+    
+        $("#latest-carousel .carousel-control-prev").on("click", function () {
+            if (scrollPosition > 0) {
+              scrollPosition -= cardWidth;
+              $("#latest-carousel .carousel-inner").animate({ scrollLeft: scrollPosition }, 500);
+            }
+        });
+    }
+});
