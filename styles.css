@@ -168,11 +168,31 @@ li a:hover {
     .img-pro {
         max-width: 120px;
     }
+    #tutorial-carousel .carousel-inner .carousel-item, #latest-carousel .carousel-inner .carousel-item {
+        margin-right: 0;
+        flex: 0 0 50%;
+        display: block;
+    }
 }
 @media only screen and (min-width: 577px) and (max-width: 768px) {
     .title {
         font-size: var(--font-size-xx-large);
     }
+    #tutorial-carousel .carousel-inner .carousel-item {
+        margin-right: 0;
+        flex: 0 0 50%;
+        display: block;
+    }
+}
+
+#tutorial-carousel {
+    min-height: 400px;
+}
+
+#tutorial-carousel .carousel-inner .carousel-item {
+    margin-right: 0;
+    flex: 0 0 25%;
+    display: block;
 }
 
 /* carousel */ 
@@ -199,6 +219,12 @@ li a:hover {
 
 .bg-black {
     background-color: var(--color-black);
+}
+
+.play-btn {
+    position: absolute;
+    top: 6%;
+    left: 35%;
 }
 
 /* PRICING */
@@ -250,8 +276,8 @@ li a:hover {
 
 /* Loader */
 .loader {
-    border: 10px solid #f3f3f3;
-    border-top: 10px solid #C271FF;
+    border: 10px solid var(--color-white);
+    border-top: 10px solid var(--color-purple);
     border-radius: 50%;
     width: 80px;
     height: 80px;
@@ -264,3 +290,19 @@ li a:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+@media (min-width: 992px) {
+    #tutorial-carousel .carousel-inner .carousel-item,  #latest-carousel .carousel-inner .carousel-item {
+      margin-right: 0;
+      flex: 0 0 25%;
+      display: block;
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 991px) {
+    #tutorial-carousel .carousel-inner .carousel-item, #latest-carousel .carousel-inner .carousel-item {
+      margin-right: 0;
+      flex: 0 0 50%;
+      display: block;
+    }
+  }
